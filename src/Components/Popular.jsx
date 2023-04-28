@@ -1,9 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Card from "./Card";
-// `https://api.themoviedb.org/3/tv/popular?api_key=6c4adaf3a193f12cfd3623a7feb6ea33` ontv
-// https://api.themoviedb.org/3/movie/now_playing?api_key=6c4adaf3a193f12cfd3623a7feb6ea33&language=en-US&page=1 intheater
-// https://api.themoviedb.org/3/movie/upcoming?api_key= upcoming
+
 
 const Popular = () => {
  const [isActive, setIsActive] = useState(1);

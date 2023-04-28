@@ -54,9 +54,9 @@ const ProgressCircle = ({ percent }) => {
     
    </svg>
    <div className="absolute font-semibold text-white">
-    {percent ? (
+    {percent > 0 ? (
      <div className="text-[13px]">
-      <p className="pr-[3px]">{percent}</p> <span className="absolute text-[8px] top-0 left-4">%</span>
+      <p className="pr-[7px]">{percent}</p> <span className="absolute text-[8px] top-0 left-4">%</span>
      </div>
     ) : (
      "NR"
