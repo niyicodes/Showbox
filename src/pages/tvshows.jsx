@@ -11,7 +11,6 @@ const tvShows = () => {
  const handleClick = (value, buttonNumber) => {
   setActive(buttonNumber);
   setButtonValue(value);
-  console.log(buttonNumber);
  };
 
  const setActive = (buttonNumber) => {
@@ -21,12 +20,11 @@ const tvShows = () => {
  const getTvShow = async () => {
   if (buttonValue) {
    const api = await fetch(
-    `https://api.themoviedb.org/3/tv/${buttonValue}?api_key=6c4adaf3a193f12cfd3623a7feb6ea33`
+    `https://api.themoviedb.org/3/tv/${buttonValue}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
    );
    const res = await api.json();
    const data = res.results;
    setTvShow(data);
-   console.log(buttonValue, data);
   }
  };
 
@@ -97,6 +95,9 @@ const tvShows = () => {
            first_air_date={show.first_air_date}
            title={show.title}
            release_date={show.release_date}
+           id={show.id}
+           media_type={show.media_type}
+           number_of_episodes={show.number_of_episodes}
           />
          );
         })

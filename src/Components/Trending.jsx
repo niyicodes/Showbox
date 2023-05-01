@@ -10,7 +10,7 @@ const Trending = () => {
  const getTrending = async () => {
   if (buttonValue) {
    const api = await fetch(
-    `https://api.themoviedb.org/3/trending/all/${buttonValue}?api_key=6c4adaf3a193f12cfd3623a7feb6ea33`
+    `https://api.themoviedb.org/3/trending/all/${buttonValue}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
    );
    const res = await api.json();
    const data = res.results;
@@ -71,7 +71,10 @@ const Trending = () => {
        vote_average={trend.vote_average}
        poster_path={trend.poster_path}
        first_air_date={trend.first_air_date}
-       title={trend.title} release_date={trend.release_date}
+       title={trend.title}
+       release_date={trend.release_date}
+       id={trend.id}
+       media_type={trend.media_type}
       />
      );
     })}

@@ -11,7 +11,6 @@ const movie = () => {
  const handleClick = (value, buttonNumber) => {
   setActive(buttonNumber);
   setButtonValue(value);
-  console.log(buttonNumber);
  };
 
  const setActive = (buttonNumber) => {
@@ -21,7 +20,7 @@ const movie = () => {
  const getMovies = async () => {
   if (buttonValue) {
    const api = await fetch(
-    `https://api.themoviedb.org/3/movie/${buttonValue}?api_key=6c4adaf3a193f12cfd3623a7feb6ea33`
+    `https://api.themoviedb.org/3/movie/${buttonValue}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
    );
    const res = await api.json();
    const data = res.results;
@@ -97,6 +96,9 @@ const movie = () => {
            first_air_date={movie.first_air_date}
            title={movie.title}
            release_date={movie.release_date}
+           id={movie.id}
+           media_type={movie.media_type}
+           number_of_episodes={movie.number_of_episodes}
           />
          );
         })

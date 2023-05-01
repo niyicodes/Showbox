@@ -1,7 +1,7 @@
 "use client";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import Card from "./Card";
-
 
 const Popular = () => {
  const [isActive, setIsActive] = useState(1);
@@ -11,7 +11,7 @@ const Popular = () => {
  const getPopular = async () => {
   if (buttonValue === "upcoming") {
    const api = await fetch(
-    `https://api.themoviedb.org/3/movie/${buttonValue}?api_key=6c4adaf3a193f12cfd3623a7feb6ea33`
+    `https://api.themoviedb.org/3/movie/${buttonValue}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
    );
    const res = await api.json();
    const data = res.results;
@@ -115,6 +115,8 @@ const Popular = () => {
        first_air_date={popu.first_air_date}
        title={popu.title}
        release_date={popu.release_date}
+       id={popu.id}
+       media_type={popu.media_type}
       />
      );
     })}
