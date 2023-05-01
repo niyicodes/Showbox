@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import ProgressCircle from "@/Components/ProgressCircle";
 import Cast from "@/Components/Cast";
+import Accordion from "@/Components/Accordion";
 
 const detailsPage = () => {
  const [showMovie, setShowMovie] = useState([]);
@@ -62,6 +63,7 @@ const detailsPage = () => {
   seasons,
   aggregate_credits,
   type,
+  keywords,
  } = showMovie;
 
  const casts = credits || aggregate_credits;
@@ -94,7 +96,9 @@ const detailsPage = () => {
       <h3 className="text-4xl font-bold mb-3">{title || name}</h3>
 
       <div className="flex xs:flex-col xs:gap-3 sm:flex-row justify-between sm:items-center mb-5">
-       <p className="xs:text-base lg:text-2xl font-medium">{release_date || first_air_date}</p>
+       <p className="xs:text-base lg:text-2xl font-medium">
+        {release_date || first_air_date}
+       </p>
        <ul className="grid grid-cols-3 gap-1 items-center">
         {genres &&
          genres.map((genre) => (
@@ -106,7 +110,9 @@ const detailsPage = () => {
           </li>
          ))}
        </ul>
-       <p className="xs:text-xl lg:text-2xl">{runtime || episode_run_time} mins</p>
+       <p className="xs:text-xl lg:text-2xl">
+        {runtime || episode_run_time} mins
+       </p>
       </div>
      </div>
 
@@ -115,7 +121,9 @@ const detailsPage = () => {
      </div>
 
      <div className="">
-      <h2 className="italic mt-3 text-zinc-400 xs:text-xl sm:text-2xl">{tagline}</h2>
+      <h2 className="italic mt-3 text-zinc-400 xs:text-xl sm:text-2xl">
+       {tagline}
+      </h2>
       <h3 className="my-3 xs:text-xl sm:text-2xl font-bold">Overview</h3>
       <p className="xs:text-xl sm:text-2xl">{overview}</p>
      </div>
@@ -124,28 +132,65 @@ const detailsPage = () => {
 
    {/* another section */}
    <section className="cast">
-
     <div className="casts-section">
-      <h3 className="my-4 text-4xl text-black">Meet the Casts</h3>
+     <h3 className="my-4 text-4xl text-black">Meet the Casts</h3>
 
      <div className="scroll my-8 grid grid-flow-col gap-4 overflow-x-scroll pb-8">
-     {casts &&
-      casts.cast.map((cast) => {
-       return (
-        <Cast
-         key={cast.id}
-         name={cast.name}
-         act_name={cast.character}
-         image={imagePath + cast.profile_path}
-        />
-       );
-      })}
+      {casts &&
+       casts.cast.map((cast) => {
+        return (
+         <Cast
+          key={cast.id}
+          name={cast.name}
+          act_name={cast.character}
+          image={imagePath + cast.profile_path}
+         />
+        );
+       })}
      </div>
     </div>
-    <div className="production">
-      
+    <div className="production mb-8 font-medium">
+     <div>
+      {production_companies && (
+       <Accordion
+        title={"Production Companies"}
+        contents={production_companies.map((company) => {
+         return <li key={company.id} className="">{company.name}</li>;
+        })}
+       />
+      )}
+     </div>
+     <div>
+      {production_countries && (
+       <Accordion
+        title={"Production Countries"}
+        contents={production_countries.map((country) => {
+         return <li key={country.id} className="">{country.name}</li>;
+        })}
+       />
+      )}
+     </div>
+     <div>
+      {keywords && (
+       <Accordion
+        title={"Keywords"}
+        grid_contents={keywords.keywords.map((keyword) => {
+         return (
+          <li
+           key={keyword.id}
+           className="bg-san-marino-200 p-2 text-black list-none rounded-2xl"
+          >
+           {keyword.name}
+          </li>
+         );
+        })}
+       />
+      )}
+     </div>
     </div>
-    <div className="videos"></div>
+   </section>
+   <section className="videosandimages">
+        
    </section>
   </main>
  );
