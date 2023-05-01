@@ -104,7 +104,7 @@ const Popular = () => {
      </button>
     </ul>
    </div>
-   <div className="trending my-8 grid grid-flow-col gap-4 overflow-x-scroll">
+   <div className="scroll my-8 grid grid-flow-col gap-4 overflow-x-scroll">
     {popular.map((popu) => {
      return (
       <Card

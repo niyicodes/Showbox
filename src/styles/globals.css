@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-  padding: 0;
-  margin:0;
-  box-sizing: border-box;
+* {
+ padding: 0;
+ margin: 0;
+ box-sizing: border-box;
+}
+
+.scroll::-webkit-scrollbar {
+ @apply w-4 bg-transparent
+}
+
+.scroll::-webkit-scrollbar-track {
+ @apply bg-zinc-300 rounded-full
+}
+.scroll::-webkit-scrollbar-thumb {
+ @apply bg-zinc-700 rounded-full 
 }

@@ -62,7 +62,7 @@ const Trending = () => {
      </button>
     </ul>
    </div>
-   <div className="trending my-8 grid grid-flow-col gap-4 overflow-x-scroll">
+   <div className="scroll my-8 grid grid-flow-col gap-4 overflow-x-scroll">
     {trending.map((trend) => {
      return (
       <Card
