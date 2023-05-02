@@ -56,7 +56,7 @@ const Popular = () => {
   <section className="my-8 sm:mx-10">
    <div className="flex xs:flex-col sm:flex-row gap-8 items-center">
     <h3 className="text-3xl font-semibold">What's Popular</h3>
-    <ul className="xs:text-base xs:mx-4 sm:mx-0 sm:text-lg flex gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
+    <ul className="xs:text-[13px] xs:mx-2 sm:mx-0 sm:text-lg flex xs:gap-2 sm:gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
      <button
       id="button1"
       className={`px-4 py-1 rounded-full ${

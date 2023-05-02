@@ -35,7 +35,7 @@ const Trending = () => {
   <section className="my-8 sm:mx-10">
    <div className="flex gap-8 items-center">
     <h3 className="text-3xl font-semibold">Trending</h3>
-    <ul className="text-lg flex gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
+    <ul className="xs:text-base sm:text-lg flex gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
      <button
       id="button1"
       value={"day"}
