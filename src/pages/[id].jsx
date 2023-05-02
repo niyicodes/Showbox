@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import YouTube from "react-youtube";
 import Image from "next/image";
 import ProgressCircle from "@/Components/ProgressCircle";
 import Cast from "@/Components/Cast";
@@ -12,8 +13,7 @@ const detailsPage = () => {
  const { id } = router.query;
 
  const imagePath = "https://image.tmdb.org/t/p/original";
- const videoPath = "https://www.youtube.com/watch?v=";
- // console.log(id)
+
  const getMovieOrShow = async () => {
   const api = await fetch(
    `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=videos,aggregate_credits,external_ids,images,keywords,`
@@ -21,14 +21,12 @@ const detailsPage = () => {
   const res = await api.json();
   if (res.last_air_date) {
    setShowMovie(res);
-   console.log(res);
   } else {
    const api = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&append_to_response=videos,credits,external_ids,images,keywords,`
    );
    const res = await api.json();
    setShowMovie(res);
-   console.log(res);
   }
  };
 
@@ -67,11 +65,20 @@ const detailsPage = () => {
  } = showMovie;
 
  const casts = credits || aggregate_credits;
- 
 
  useEffect(() => {
   getMovieOrShow();
  }, [id]);
+
+ const opts = {
+  height: "150",
+  width: "300",
+ };
+ const onPlayerReady = (event) => {
+  event.target.pauseVideo();
+ };
+
+ 
  return (
   <main className="my-3 xs:mx-2 sm:mx-6">
    <section
@@ -86,8 +93,8 @@ const detailsPage = () => {
     <div className="image sm:w-4/12">
      <Image
       src={imagePath + poster_path}
-      width="10000"
-      height="10000"
+      width="1000"
+      height="1000"
       alt={title || name}
       className="w-[300px] h-[400px] object-fill rounded-2xl"
      />
@@ -95,24 +102,27 @@ const detailsPage = () => {
     <div className="details sm:w-3/4">
      <div className="div">
       <h3 className="text-4xl font-bold mb-3">{title || name}</h3>
-
+      {seasons && <div className="div flex flex-row gap-4 xs:text-lg md:text-xl font-medium">
+      <h3>{number_of_seasons && number_of_seasons} seasons</h3>
+      <h3>{number_of_episodes && number_of_episodes} episodes</h3>
+      </div>}
       <div className="flex xs:flex-col xs:gap-3 sm:flex-row justify-between sm:items-center mb-5">
-       <p className="xs:text-base lg:text-2xl font-medium">
+       <p className="xs:text-base lg:text-xl font-medium">
         {release_date || first_air_date}
        </p>
-       <ul className="grid grid-cols-3 gap-1 items-center">
+       <ul className="grid grid-cols-2 xl:grid-cols-3 gap-2 items-center">
         {genres &&
          genres.map((genre) => (
           <li
            key={genre.id}
-           className="bg-san-marino-700 xs:text-xl lg:text-2xl font-bold rounded-lg py-1 px-3"
+           className="bg-san-marino-700 xs:text-lg lg:text-xl font-bold rounded-lg py-1 px-3"
           >
            {genre.name}
           </li>
          ))}
        </ul>
        <p className="xs:text-xl lg:text-2xl">
-        {runtime || episode_run_time} mins
+        {runtime || episode_run_time} total mins
        </p>
       </div>
      </div>
@@ -141,7 +151,7 @@ const detailsPage = () => {
        casts.cast.map((cast) => {
         return (
          <Cast
-          key={cast.id}
+          key={cast.cast_id}
           name={cast.name}
           act_name={cast.character}
           image={imagePath + cast.profile_path}
@@ -169,9 +179,9 @@ const detailsPage = () => {
       {production_countries && (
        <Accordion
         title={"Production Countries"}
-        contents={production_countries.map((country) => {
+        contents={production_countries.map((country,index) => {
          return (
-          <li key={country.id} className="">
+          <li key={index} className="">
            {country.name}
           </li>
          );
@@ -211,7 +221,37 @@ const detailsPage = () => {
      </div>
     </div>
    </section>
-   <section className="videosandimages"></section>
+   <section className="videosandimages">
+    {/* images */}
+    <div className=" my-4 p-4 flex flex-row gap-5 overflow-x-scroll scroll">
+     {images &&
+      images.backdrops.slice(0, 50).map((image, index) => {
+       return (
+        <img
+         key={index}
+         src={imagePath + image.file_path}
+         alt={index + image.vote_average}
+         className="w-[300px] h-[200px]"
+        />
+       );
+      })}
+    </div>
+
+    {/* videos */}
+    <div className=" my-4 p-4 flex flex-row gap-5 overflow-x-scroll scroll">
+     {videos &&
+      videos.results.slice(0, 5).map((video) => {
+       return (
+        <YouTube
+         key={video.id}
+         videoId={video.key}
+         opts={opts}
+         onReady={onPlayerReady}
+        />
+       );
+      })}
+    </div>
+   </section>
   </main>
  );
 };

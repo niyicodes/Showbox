@@ -12,7 +12,7 @@ const PageCard = ({
  id, media_type,number_of_episodes
 }) => {
  const imagePath = "https://image.tmdb.org/t/p/original";
- const TITLE = title || name
+
  return (
   <div className="flex flex-col gap-2 xs:w-[180px] sm:w-[250px] hover:cursor-pointer">
    <div className="relative mb-4">
@@ -30,15 +30,13 @@ const PageCard = ({
     </div>
    </div>
    <div className="details px-3">
-    {name && <h5 className="font-bold text-lg">{name}</h5>}
-    {title && <h5 className="font-bold text-lg">{title}</h5>}
+    {name && <h5 className="font-bold text-lg">{name || title}</h5>}
     {first_air_date && (
      <p className="text-sm text-gray-300 font-medium">{first_air_date}</p>
     )}
     {release_date && (
      <p className="text-sm text-gray-300 font-medium">{release_date}</p>
     )}
-    <p className="hidden">{media_type}{number_of_episodes}</p>
    </div>
   </div>
  );

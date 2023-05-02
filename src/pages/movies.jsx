@@ -25,7 +25,6 @@ const movie = () => {
    const res = await api.json();
    const data = res.results;
    setMovies(data);
-   console.log(buttonValue, data);
   }
  };
 

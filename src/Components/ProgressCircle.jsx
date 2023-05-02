@@ -47,7 +47,7 @@ const ProgressCircle = ({ percent }) => {
      stroke={bar[getColor(percent)]}
      strokeWidth={6}
      strokeDasharray={dashArray}
-     strokeDashoffset={dashOffset}
+     strokeDashoffset={dashOffset.toString()}
      strokeLinecap={"round"}
      className="scale-[0.95]"
     />
