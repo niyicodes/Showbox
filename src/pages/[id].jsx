@@ -67,6 +67,7 @@ const detailsPage = () => {
  } = showMovie;
 
  const casts = credits || aggregate_credits;
+ 
 
  useEffect(() => {
   getMovieOrShow();
@@ -155,7 +156,11 @@ const detailsPage = () => {
        <Accordion
         title={"Production Companies"}
         contents={production_companies.map((company) => {
-         return <li key={company.id} className="">{company.name}</li>;
+         return (
+          <li key={company.id} className="">
+           {company.name}
+          </li>
+         );
         })}
        />
       )}
@@ -165,7 +170,11 @@ const detailsPage = () => {
        <Accordion
         title={"Production Countries"}
         contents={production_countries.map((country) => {
-         return <li key={country.id} className="">{country.name}</li>;
+         return (
+          <li key={country.id} className="">
+           {country.name}
+          </li>
+         );
         })}
        />
       )}
@@ -174,24 +183,35 @@ const detailsPage = () => {
       {keywords && (
        <Accordion
         title={"Keywords"}
-        grid_contents={keywords.keywords.map((keyword) => {
-         return (
-          <li
-           key={keyword.id}
-           className="bg-san-marino-200 p-2 text-black list-none rounded-2xl"
-          >
-           {keyword.name}
-          </li>
-         );
-        })}
+        grid_contents={
+         keywords.keywords
+          ? keywords.keywords.map((keyword) => {
+             return (
+              <li
+               key={keyword.id}
+               className="bg-san-marino-200 p-2 text-black list-none rounded-2xl"
+              >
+               {keyword.name}
+              </li>
+             );
+            })
+          : keywords.results.map((keyword) => {
+             return (
+              <li
+               key={keyword.id}
+               className="bg-san-marino-200 p-2 text-black list-none rounded-2xl"
+              >
+               {keyword.name}
+              </li>
+             );
+            })
+        }
        />
       )}
      </div>
     </div>
    </section>
-   <section className="videosandimages">
-        
-   </section>
+   <section className="videosandimages"></section>
   </main>
  );
 };
