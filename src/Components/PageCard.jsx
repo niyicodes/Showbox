@@ -14,7 +14,7 @@ const PageCard = ({
  const imagePath = "https://image.tmdb.org/t/p/original";
 
  return (
-  <div className="flex flex-col gap-2 xs:w-[180px] sm:w-[250px] hover:cursor-pointer">
+  <div className="flex flex-col gap-2 xs:w-[170px] sm:w-[250px] hover:cursor-pointer">
    <div className="relative mb-4">
     <Link href={`/${id}`}>
     <Image

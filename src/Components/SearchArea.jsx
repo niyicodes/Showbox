@@ -23,9 +23,9 @@ const SearchArea = () => {
      name="search"
      id="search"
      placeholder="Search for a movie, tvshow, person, etc..."
-     className="w-full xs:py-2 sm:py-4 xs:px-5 sm:px-7 rounded-3xl text-san-marino-900 outline-0 xs:text-lg sm:text-2xl"
+     className="w-full xs:py-2 sm:py-4 xs:px-5 sm:px-7 rounded-3xl text-san-marino-900 outline-0 xs:text-lg sm:text-2xl overflow-hidden"
     />
-    <button type="submit" className="xs:text-base sm:text-xl absolute right-2 text-white xs:top-3 sm:top-1 bg-san-marino-400 rounded-r-3xl xs:p-1 sm:p-3">
+    <button type="submit" className="xs:text-base sm:text-xl absolute -right-1 text-white top-0 bg-san-marino-400 rounded-r-3xl xs:p-3 sm:p-5 h-auto">
      Search
     </button>
    </div>
