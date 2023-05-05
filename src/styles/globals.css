@@ -18,3 +18,20 @@
 .scroll::-webkit-scrollbar-thumb {
  @apply bg-zinc-700 rounded-full 
 }
+
+
+.opacity-transition {
+ animation-duration: 700ms;
+ animation-fill-mode: both;
+ animation-name: fadeInOut;
+ animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeInOut {
+ from {
+   opacity: 0;
+ }
+ to {
+   opacity: 1;
+ }
+}

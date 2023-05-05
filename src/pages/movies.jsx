@@ -1,6 +1,7 @@
 "use client";
 
 import PageCard from "@/Components/PageCard";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const movie = () => {
@@ -32,7 +33,9 @@ const movie = () => {
   getMovies();
  }, [buttonValue]);
  return (
-  <main className="xs:mx-3 sm:mx-8">
+  <motion.main className="xs:mx-3 sm:mx-8" initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}>
    <nav className="flex justify-center my-3">
     <ul className="xs:text-base xs:mx-4 sm:mx-0 sm:text-lg xs:grid xs:grid-cols-2 sm:flex gap-4 sm:border-2  text-san-marino-950 rounded-full sm:overflow-hidden">
      <button
@@ -104,7 +107,7 @@ const movie = () => {
       : null}
     </div>
    </section>
-  </main>
+  </motion.main>
  );
 };
 

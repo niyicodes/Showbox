@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
  return (
   <div>
    <Navbar />
-   <main className="xl:mx-24">
+   <main className="xl:mx-24 opacity-0 opacity-transition">
    {children}
    </main>
   </div>

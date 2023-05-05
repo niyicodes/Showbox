@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
@@ -53,7 +54,13 @@ const Popular = () => {
   getPopular();
  }, [isActive, buttonValue]);
  return (
-  <section className="my-8 sm:mx-10">
+  <motion.section
+   className="my-8 sm:mx-10"
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   exit={{ opacity: 0 }}
+   transition={{ duration: 2, ease: "easeInOut", delay: 0.9 }}
+  >
    <div className="flex xs:flex-col sm:flex-row gap-8 items-center">
     <h3 className="text-3xl font-semibold">What's Popular</h3>
     <ul className="xs:text-[13px] xs:mx-2 sm:mx-0 sm:text-lg flex xs:gap-2 sm:gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
@@ -120,7 +127,7 @@ const Popular = () => {
      );
     })}
    </div>
-  </section>
+  </motion.section>
  );
 };
 

@@ -5,6 +5,8 @@ import Image from "next/image";
 import ProgressCircle from "@/Components/ProgressCircle";
 import Cast from "@/Components/Cast";
 import Accordion from "@/Components/Accordion";
+import Arrow from "@/Components/Arrow";
+import { motion } from "framer-motion";
 
 const detailsPage = () => {
  const [showMovie, setShowMovie] = useState([]);
@@ -78,9 +80,25 @@ const detailsPage = () => {
   event.target.pauseVideo();
  };
 
- 
+ const handleGoBack = () => {
+  router.back();
+ };
+
  return (
-  <main className="my-3 xs:mx-2 sm:mx-6">
+  <motion.main
+   className="my-3 xs:mx-2 sm:mx-6"
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   exit={{ opacity: 0 }}
+  >
+   <section>
+    <button
+     className="nav flex items-center gap-2 text-white font-bold bg-san-marino-500 px-4 rounded-xl mb-2 hover:scale-75 transition-all duration-500 ease-out"
+     onClick={handleGoBack}
+    >
+     <Arrow /> Go back
+    </button>
+   </section>
    <section
     className="top flex xs:flex-col sm:flex-row gap-6 py-6 px-8 bg-blend-overlay text-white"
     style={{
@@ -102,10 +120,12 @@ const detailsPage = () => {
     <div className="details sm:w-3/4">
      <div className="div">
       <h3 className="text-4xl font-bold mb-3">{title || name}</h3>
-      {seasons && <div className="div flex flex-row gap-4 xs:text-lg md:text-xl font-medium">
-      <h3>{number_of_seasons && number_of_seasons} seasons</h3>
-      <h3>{number_of_episodes && number_of_episodes} episodes</h3>
-      </div>}
+      {seasons && (
+       <div className="div flex flex-row gap-4 xs:text-lg md:text-xl font-medium">
+        <h3>{number_of_seasons && number_of_seasons} seasons</h3>
+        <h3>{number_of_episodes && number_of_episodes} episodes</h3>
+       </div>
+      )}
       <div className="flex xs:flex-col xs:gap-3 sm:flex-row justify-between sm:items-center mb-5">
        <p className="xs:text-base lg:text-xl font-medium">
         {release_date || first_air_date}
@@ -179,7 +199,7 @@ const detailsPage = () => {
       {production_countries && (
        <Accordion
         title={"Production Countries"}
-        contents={production_countries.map((country,index) => {
+        contents={production_countries.map((country, index) => {
          return (
           <li key={index} className="">
            {country.name}
@@ -252,7 +272,7 @@ const detailsPage = () => {
       })}
     </div>
    </section>
-  </main>
+  </motion.main>
  );
 };
 

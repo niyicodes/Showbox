@@ -14,11 +14,14 @@ const SearchArea = () => {
 
  const handleSearch = (e) => {
   e.preventDefault();
-  
-  router.push({
-   pathname: '/search',
-   query:{q: Query},
-  })
+  if(Query === ""){
+   alert("Please kindly type in a word")
+  }else{
+   router.push({
+    pathname: '/search',
+    query:{q: Query},
+   })
+  }
  };
 
  return (

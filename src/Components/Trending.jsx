@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Card from "./Card";
 
@@ -32,7 +33,13 @@ const Trending = () => {
  }, [isActive, buttonValue]);
 
  return (
-  <section className="my-8 sm:mx-10">
+  <motion.section
+   className="my-8 sm:mx-10"
+   initial={{ opacity: 0 }}
+   animate={{ opacity: 1 }}
+   exit={{ opacity: 0 }}
+   transition={{ duration: 2, ease: "easeInOut", delay: 0.9 }}
+  >
    <div className="flex gap-8 items-center">
     <h3 className="text-3xl font-semibold">Trending</h3>
     <ul className="xs:text-base sm:text-lg flex gap-4 border-2  text-san-marino-950 rounded-full overflow-hidden">
@@ -62,7 +69,10 @@ const Trending = () => {
      </button>
     </ul>
    </div>
-   <div className="scroll my-8 grid grid-flow-col gap-4 overflow-x-scroll">
+   <div
+    className="scroll my-8 grid grid-flow-col gap-4 overflow-x-scroll"
+   
+   >
     {trending.map((trend) => {
      return (
       <Card
@@ -79,7 +89,7 @@ const Trending = () => {
      );
     })}
    </div>
-  </section>
+  </motion.section>
  );
 };
 
