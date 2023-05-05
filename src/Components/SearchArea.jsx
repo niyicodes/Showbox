@@ -1,7 +1,26 @@
 "use client";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const SearchArea = () => {
+ const router = useRouter();
+
+ const [Query, setQuery] = useState("");
+
+ const handleChange = (e) => {
+  setQuery(e.target.value);
+ };
+
+
+ const handleSearch = (e) => {
+  e.preventDefault();
+  
+  router.push({
+   pathname: '/search',
+   query:{q: Query},
+  })
+ };
+
  return (
   <main
    style={{
@@ -15,7 +34,9 @@ const SearchArea = () => {
   >
    <div className="mb-4">
     <h3 className="mb-4 font-bold text-4xl sm:text-5xl">Welcome to SHOWBOX</h3>
-    <p className="font-medium text-2xl sm:text-3xl">Millions of movies, TV shows and people to discover. Explore now.</p>
+    <p className="font-medium text-2xl sm:text-3xl">
+     Millions of movies, TV shows and people to discover. Explore now.
+    </p>
    </div>
    <div className="relative overflow-hidden">
     <input
@@ -24,8 +45,13 @@ const SearchArea = () => {
      id="search"
      placeholder="Search for a movie, tvshow, person, etc..."
      className="w-full xs:py-2 sm:py-4 xs:px-5 sm:px-7 rounded-3xl text-san-marino-900 outline-0 xs:text-lg sm:text-2xl overflow-hidden"
+     value={Query}
+     onChange={handleChange}
     />
-    <button type="submit" className="xs:text-base sm:text-xl absolute -right-1 text-white top-0 bg-san-marino-400 rounded-r-3xl xs:p-3 sm:p-5 h-auto">
+    <button
+     type="submit"
+     className="xs:text-base sm:text-xl absolute -right-1 text-white top-0 bg-san-marino-400 rounded-r-3xl xs:p-3 sm:p-5 h-auto" onClick={handleSearch}
+    >
      Search
     </button>
    </div>
