@@ -38,7 +38,7 @@ const Trending = () => {
    initial={{ opacity: 0 }}
    animate={{ opacity: 1 }}
    exit={{ opacity: 0 }}
-   transition={{ duration: 2, ease: "easeInOut", delay: 0.9 }}
+   transition={{ duration: .5, ease: "easeInOut", delay: 0.4 }}
   >
    <div className="flex gap-8 items-center">
     <h3 className="text-3xl font-semibold">Trending</h3>
