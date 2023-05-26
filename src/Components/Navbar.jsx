@@ -71,7 +71,7 @@ const Navbar = () => {
         </Link>
        </li>
        <li className="text-white">
-        <Link href="/people">
+        <Link href="#">
          People
         </Link>
        </li>
